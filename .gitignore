@@ -3,5 +3,6 @@
 
 # But not these:
 !.gitignore
+!.gitattributes
 !*.py
 !*.pkl
