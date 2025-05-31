@@ -1,16 +1,17 @@
 import streamlit as st
-import pickle
+import joblib # Changed from pickle to joblib
 import pandas as pd
 import numpy as np
 
 # --- Configuration ---
-MODEL_PATH = 'model_RF.pkl' # Ensure this path is correct
+# Update the path to point to your joblib file
+MODEL_PATH = 'model_RF.joblib' 
 
 # --- Load the model (using Streamlit's caching for efficiency) ---
 @st.cache_resource
 def load_model(path):
-    with open(path, 'rb') as f:
-        model = pickle.load(f)
+    # Use joblib.load() instead of pickle.load()
+    model = joblib.load(path)
     return model
 
 model = load_model(MODEL_PATH)
@@ -30,7 +31,7 @@ EDUCATION_MAP = {
 INCOME_MAP = {
     1: '<$10,000', 2: '$10,000 - $14,999', 3: '$15,000 - $19,999',
     4: '$20,000 - $24,999', 5: '$25,000 - $34,999', 6: '$35,000 - $49,999',
-    7: '$50,000 - $74,999', # FIX: Changed single quotes to double quotes for consistency and to avoid error
+    7: '$50,000 - $74,999', 
     8: '>= $75,000'
 }
 
